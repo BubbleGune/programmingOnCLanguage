@@ -6,7 +6,7 @@ int SumDigits(int x);
 int Search(int n, int digit);
 int Reverse(int a);
 int Degree5(unsigned long a);
-unsigned long GetNumber(unsigned long a);
+unsigned long GetNumberWithoutZeroAndFive(unsigned long a);
 
 int main()
 {
@@ -18,7 +18,7 @@ int main()
 	printf("%s\n", Search(n, digit) ? "yes" : "no");	
 	printf("%d\n", Reverse(234));
 	printf("%d\n", Degree5(225));
-	printf("%lu\n", GetNumber(102035));
+	printf("%lu\n", GetNumberWithoutZeroAndFive(102035));
 }
 int CountDigits(int x)
 {
@@ -57,7 +57,7 @@ int Degree5(unsigned long a)
 		a /= 5;
 	return (a == 1);
 }
-unsigned long GetNumber(unsigned long a)
+unsigned long GetNumberWithoutZeroAndFive(unsigned long a)
 {
 	unsigned long p = 1, b = 0, digit;
 	while(a)
