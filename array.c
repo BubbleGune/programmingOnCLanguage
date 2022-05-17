@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 10
+#define N 5
 int IsProgression(const int *a, const int n);
 int IsEquals(const int *a, const int n);
 int IsEqualsIfOrderedArray(const int *a, const int n);
 int IsElementsDifferent(const int *a, const int n);
 void Exchange(int *a, int n, int x);
+void ExchangeEquals(int *a, int n, int x);
 
 int main()
 {
@@ -16,7 +17,11 @@ int main()
 		printf("%d\n", a[i]);
 	}
 	putchar('\v');
-	Exchange(a, N, 6);
+	Exchange(a, N, 5);
+	for (int i = 0; i < N; i++)
+		printf("%d\n", a[i]);
+	putchar('\v');
+	ExchangeEquals(a, N, 5);	
 	putchar('\v');
 	for (int i = 0; i < N; i++)
 		printf("%d\n", a[i]);		
@@ -50,7 +55,7 @@ int IsEqualsIfOrderedArray(const int *a, const int n)
 int IsElementsDifferent(const int *a, const int n)
 {
 	int i, is_different = 1, count[256] = {0};
-//	for (int i = 0; i < n && is_different; i++)
+//	for (i = 0; i < n && is_different; i++)
 //	{
 //		count[a[i]]++;
 //		if (count[a[i]] > 1)
@@ -58,7 +63,7 @@ int IsElementsDifferent(const int *a, const int n)
 //		if(++count[a[i]] > 1)
 //			is_different = 0;
 //	}	
-	for (int i = 0; i < n && ++count[a[i]]; i++);
+	for (i = 0; i < n && ++count[a[i]]; i++);
 	return i >= n;
 }
 void Exchange(int *a, int n, int x)
@@ -75,4 +80,33 @@ void Exchange(int *a, int n, int x)
 			buf = a[i]; a[i] = a[j]; a[j] = buf;
 		}
 	}	
+}
+void ExchangeEquals(int *a, int n, int x)
+{
+	int i = 0, j = n - 1, buf;
+	while (i < j)
+	{
+		while (i < j && a[i] < x)
+			i++; 
+		while (i < j && a[j] >= x)
+			j--; 
+		if (i < j)
+		{
+			buf = a[i]; a[i] = a[j]; a[j] = buf;
+			i++; j--;
+		}
+	}
+	j = n - 1;
+	while (i < j)
+	{
+		while (i < j && a[i] == x)
+			i++;
+		while (i < j && a[j] != x)
+			j--;
+		if (i < j)
+		{
+			a[j] = a[i]; a[i] = x;
+			i++; j--;
+		}
+	}
 }
